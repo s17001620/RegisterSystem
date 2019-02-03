@@ -1,6 +1,7 @@
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ public class StudentTableViewFactory {
 // Returns an observable list of persons
 
     private ObservableList<Student> studentList;
+    private RegisterSystemMainViewControllerNoFxml controller;
 
     public StudentTableViewFactory() {
         studentList = FXCollections.<Student>observableArrayList();
@@ -37,9 +39,11 @@ public class StudentTableViewFactory {
         return table;
     }
     
-        public TableView<Student> getPrepopulatedEditableTable() {
+        public TableView<Student> getPrepopulatedEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
         TableView<Student> table = new TableView<>();
         this.prepopulateListWithDummyData();
+        this.controller = controller;
+        this.controller.getModel().getStudentList().addAll(getStudentList());
         table.getItems().addAll(getStudentList());
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
@@ -66,9 +70,10 @@ public class StudentTableViewFactory {
         return table;
     }
     
-        public TableView<Student> getNewEditableTable() {
+        public TableView<Student> getNewEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
         TableView<Student> table = new TableView<>();
         this.prepopulateListWithDummyData();
+        this.controller = controller;
         table.getColumns().addAll(getIdColumn(), getFirstNameColumn(),
                 getLastNameColumn(), getStreetColumn(),
                 getZipCodeColumn(), getCityColumn(), getCountryColumn());

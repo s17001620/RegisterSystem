@@ -22,9 +22,6 @@ public class Student extends Person implements Serializable {
 
     String studentID;
 
-    @OneToMany(mappedBy = "attendingStudent")
-    Set<Attendence> datesAttended = new HashSet<Attendence>();
-
     @OneToMany(mappedBy = "student")
     Set<CourseMember> courses = new HashSet<CourseMember>();
 

@@ -6,11 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+@Component
 public class CourseNewDataPaneFactory {
 public GridPane buildNewCourseDataPane(RegisterSystemMainViewControllerNoFxml controller){
        GridPane pane = new GridPane();
@@ -24,6 +27,7 @@ public GridPane buildNewCourseDataPane(RegisterSystemMainViewControllerNoFxml co
         pane.addRow(1, new Label("Code: "), controller.getCodeField());
         pane.addRow(2, new Label("Description: "), controller.getDescriptionField());
 
+  
          
         // Create the Add Button and add Event-Handler
         Button addButton = new Button("Add");       

@@ -1,4 +1,3 @@
-
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
@@ -8,22 +7,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+@Component
 public class CourseMemberTableViewFactory {
-    
+
     public TableView<CourseMember> getNewTable() {
         TableView<CourseMember> table = new TableView<>();
-        table.getColumns().addAll(getIdColumn(),getStudentColumn(),getCourseColumn());
+        table.getColumns().addAll(getIdColumn(), getStudentColumn(), getCourseColumn());
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
         return table;
     }
-    
-        public TableColumn<CourseMember, Long> getIdColumn() {
+
+    public TableColumn<CourseMember, Long> getIdColumn() {
         TableColumn<CourseMember, Long> idCol = new TableColumn<>("Id");
         PropertyValueFactory<CourseMember, Long> idCellValueFactory = new PropertyValueFactory<>("id");
         idCol.setCellValueFactory(idCellValueFactory);

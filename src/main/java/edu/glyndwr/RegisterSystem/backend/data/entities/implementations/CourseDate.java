@@ -4,9 +4,12 @@ import edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEnti
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,11 +29,23 @@ public class CourseDate  extends GenericEntity implements Serializable{
     @JoinColumn(name = "course")
     private Course course;
 
+    @OneToMany(mappedBy = "courseDate")
+    Set<Attendence> datesAttended = new HashSet<Attendence>();
+    
+    public CourseDate(){
+        
+    }   
+    
     public CourseDate(long id, Course course, LocalDate courseDay) {
         this.id = id;
         this.course = course;
         this.courseDay = courseDay;
     }
+    
+     @Override
+       public String toString(){
+           return this.course.getName()+", "+this.courseDay.toString();
+       }
 
 }
 

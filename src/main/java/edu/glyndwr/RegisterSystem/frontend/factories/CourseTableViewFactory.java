@@ -2,6 +2,7 @@
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -11,23 +12,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Getter;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
-@Service
+@Component
 public class CourseTableViewFactory {
     @Getter
     private ObservableList<Course> courseList;
+    private RegisterSystemMainViewControllerNoFxml controller;
     
     public CourseTableViewFactory() {
         courseList = FXCollections.<Course>observableArrayList();
     }
-    public TableView<Course> getPrepopulatedEditableTable() {
+    public TableView<Course> getPrepopulatedEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
         TableView<Course> table = new TableView<>();
         this.prepopulateListWithDummyData();
+        this.controller = controller;
+        this.controller.getModel().getCourseList().addAll(getCourseList());
         table.getItems().addAll(getCourseList());
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
@@ -40,8 +45,9 @@ public class CourseTableViewFactory {
     }
     
     
-        public TableView<Course> getNewEditableTable() {
+        public TableView<Course> getNewEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
         TableView<Course> table = new TableView<>();
+        this.controller = controller;
         table.getItems().addAll(getCourseList());
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No visible columns and/or data exist."));

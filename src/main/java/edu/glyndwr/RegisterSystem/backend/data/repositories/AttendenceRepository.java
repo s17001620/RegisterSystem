@@ -7,7 +7,7 @@ package edu.glyndwr.RegisterSystem.backend.data.repositories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate;
-import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
+import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,8 +17,7 @@ import org.springframework.stereotype.Repository;
  * @author Alexander Bruckbauer s17001620
  */
 @Repository
-public interface AttendenceRepository extends JpaRepository<Attendence, Long>{
-    List<Attendence> findByAttended(Boolean attended);
+public interface AttendenceRepository extends JpaRepository<Attendence, Long>{;
     List<Attendence> findByCourseDate(CourseDate courseDate);
-    List<Attendence> findByAttendingStudent(Student attendingStudent); 
+    List<Attendence> findByCourseMember(CourseMember courseMember); 
 }

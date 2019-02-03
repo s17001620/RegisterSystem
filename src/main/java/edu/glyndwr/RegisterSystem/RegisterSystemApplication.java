@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @Log
@@ -13,8 +15,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("edu.glyndwr")
 @EnableJpaRepositories
 public class RegisterSystemApplication extends Application {
+    private ConfigurableApplicationContext context;
     @Autowired
-    private RegisterSystemMainViewControllerNoFxml stageController;
+    private RegisterSystemMainViewControllerNoFxml fegisterSystemMainViewControllerNoFxml;
 
     public static void main(String[] args) {
         launch(args);
@@ -22,8 +25,19 @@ public class RegisterSystemApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        stageController = new RegisterSystemMainViewControllerNoFxml();
-        stageController.initializeStage(primaryStage);
+        fegisterSystemMainViewControllerNoFxml = (RegisterSystemMainViewControllerNoFxml) context.getBean(RegisterSystemMainViewControllerNoFxml.class);
+        fegisterSystemMainViewControllerNoFxml.initializeStage(primaryStage);
+    }
+    
+    @Override
+    public void init() throws Exception {
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(RegisterSystemApplication.class);
+        context = builder.run(getParameters().getRaw().toArray(new String[0]));
+    }
+    
+      @Override
+    public void stop() throws Exception {
+        context.close();
     }
     
     /*

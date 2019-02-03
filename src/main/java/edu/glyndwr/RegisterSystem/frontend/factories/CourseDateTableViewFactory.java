@@ -4,16 +4,18 @@ package edu.glyndwr.RegisterSystem.frontend.factories;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate;
 import java.time.LocalDate;
-import java.util.Date;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.springframework.stereotype.Component;
+
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+@Component
 public class CourseDateTableViewFactory {
   
     public TableView<CourseDate> getNewTable() {
