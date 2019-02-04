@@ -2,7 +2,7 @@ package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember;
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javafx.event.ActionEvent;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CourseMemberNewDataPaneFactory {
 
-    public GridPane buildNewCourseMemberDataPane(RegisterSystemMainViewControllerNoFxml controller) {
+    public GridPane buildNewCourseMemberDataPane(RegisterSystemMainViewController controller) {
         GridPane pane = new GridPane();
         pane.setHgap(10);
         pane.setVgap(5);

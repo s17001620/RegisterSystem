@@ -5,6 +5,7 @@ import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
+import edu.glyndwr.RegisterSystem.backend.data.services.RegistryService;
 import edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade;
 import edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel;
 import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
@@ -27,8 +28,9 @@ import org.springframework.stereotype.Component;
  * @author Alexander Bruckbauer s17001620
  */
 @Component("fegisterSystemMainViewControllerNoFxml")
-public class RegisterSystemMainViewControllerNoFxml {
-
+public class RegisterSystemMainViewController {
+    @Autowired
+    private RegistryService service;
     @Autowired
     private FrontendFactoryFacade frontendFactoryFacade;
     @Autowired

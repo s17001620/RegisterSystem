@@ -1,7 +1,7 @@
 
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Component
 public class CourseNewDataPaneFactory {
-public GridPane buildNewCourseDataPane(RegisterSystemMainViewControllerNoFxml controller){
+public GridPane buildNewCourseDataPane(RegisterSystemMainViewController controller){
        GridPane pane = new GridPane();
          
         // Set the hgap and vgap properties

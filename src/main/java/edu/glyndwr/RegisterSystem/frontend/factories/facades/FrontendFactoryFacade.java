@@ -2,7 +2,7 @@
 
 package edu.glyndwr.RegisterSystem.frontend.factories.facades;
 
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import edu.glyndwr.RegisterSystem.frontend.factories.AttendenceNewDataPaneFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.AttendenceTableViewFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.CourseDateNewDataPaneFactory;
@@ -56,7 +56,7 @@ public class FrontendFactoryFacade {
     @Autowired
     private ProfileHeaderPaneFactory profileHeaderPaneFactory;
     
-    public Stage buildFrontendUI(RegisterSystemMainViewControllerNoFxml controller, Stage stage){
+    public Stage buildFrontendUI(RegisterSystemMainViewController controller, Stage stage){
         VBox root = new VBox();
         root.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 

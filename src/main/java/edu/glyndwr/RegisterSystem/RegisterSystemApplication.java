@@ -1,6 +1,6 @@
 package edu.glyndwr.RegisterSystem;
 
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import lombok.extern.java.Log;
@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class RegisterSystemApplication extends Application {
     private ConfigurableApplicationContext context;
     @Autowired
-    private RegisterSystemMainViewControllerNoFxml fegisterSystemMainViewControllerNoFxml;
+    private RegisterSystemMainViewController fegisterSystemMainViewControllerNoFxml;
 
     public static void main(String[] args) {
         launch(args);
@@ -25,7 +25,7 @@ public class RegisterSystemApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        fegisterSystemMainViewControllerNoFxml = (RegisterSystemMainViewControllerNoFxml) context.getBean(RegisterSystemMainViewControllerNoFxml.class);
+        fegisterSystemMainViewControllerNoFxml = (RegisterSystemMainViewController) context.getBean(RegisterSystemMainViewController.class);
         fegisterSystemMainViewControllerNoFxml.initializeStage(primaryStage);
     }
     

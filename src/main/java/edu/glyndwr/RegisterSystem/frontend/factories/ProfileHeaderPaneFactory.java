@@ -4,7 +4,7 @@ import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attenden
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProfileHeaderPaneFactory {
 
-    public GridPane buildNewPersonDataPane(RegisterSystemMainViewControllerNoFxml controller) {
+    public GridPane buildNewPersonDataPane(RegisterSystemMainViewController controller) {
         GridPane pane = new GridPane();
 
         // Set the hgap and vgap properties

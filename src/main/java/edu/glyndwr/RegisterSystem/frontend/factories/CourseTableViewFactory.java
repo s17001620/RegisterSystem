@@ -2,7 +2,7 @@
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
-import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewControllerNoFxml;
+import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -23,12 +23,12 @@ import org.springframework.stereotype.Component;
 public class CourseTableViewFactory {
     @Getter
     private ObservableList<Course> courseList;
-    private RegisterSystemMainViewControllerNoFxml controller;
+    private RegisterSystemMainViewController controller;
     
     public CourseTableViewFactory() {
         courseList = FXCollections.<Course>observableArrayList();
     }
-    public TableView<Course> getPrepopulatedEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
+    public TableView<Course> getPrepopulatedEditableTable(RegisterSystemMainViewController controller) {
         TableView<Course> table = new TableView<>();
         this.prepopulateListWithDummyData();
         this.controller = controller;
@@ -45,7 +45,7 @@ public class CourseTableViewFactory {
     }
     
     
-        public TableView<Course> getNewEditableTable(RegisterSystemMainViewControllerNoFxml controller) {
+        public TableView<Course> getNewEditableTable(RegisterSystemMainViewController controller) {
         TableView<Course> table = new TableView<>();
         this.controller = controller;
         table.getItems().addAll(getCourseList());
