@@ -38,8 +38,8 @@ public class StudentTableViewFactory {
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
         return table;
     }
-    
-        public TableView<Student> getPrepopulatedEditableTable(RegisterSystemMainViewController controller) {
+
+    public TableView<Student> getPrepopulatedEditableTable(RegisterSystemMainViewController controller) {
         TableView<Student> table = new TableView<>();
         this.prepopulateListWithDummyData();
         this.controller = controller;
@@ -58,7 +58,7 @@ public class StudentTableViewFactory {
         addStudentIDColumn(table);
         return table;
     }
-    
+
     public TableView<Student> getNewTable() {
         TableView<Student> table = new TableView<>();
         this.prepopulateListWithDummyData();
@@ -69,8 +69,8 @@ public class StudentTableViewFactory {
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
         return table;
     }
-    
-        public TableView<Student> getNewEditableTable(RegisterSystemMainViewController controller) {
+
+    public TableView<Student> getNewEditableTable(RegisterSystemMainViewController controller) {
         TableView<Student> table = new TableView<>();
         this.prepopulateListWithDummyData();
         this.controller = controller;
@@ -89,9 +89,8 @@ public class StudentTableViewFactory {
         addCountryColumn(table);
         addStudentIDColumn(table);
         return table;
-        }
-    
-    
+    }
+
     public ObservableList<Student> getStudentList() {
         return this.studentList;
     }
@@ -100,7 +99,6 @@ public class StudentTableViewFactory {
         this.studentList = studentList;
     }
 
-    // Returns Student Id TableColumn
     public TableColumn<Student, Long> getIdColumn() {
         TableColumn<Student, Long> idCol = new TableColumn<>("Id");
         PropertyValueFactory<Student, Long> idCellValueFactory = new PropertyValueFactory<>("id");
@@ -108,7 +106,6 @@ public class StudentTableViewFactory {
         return idCol;
     }
 
-    // Returns First Name TableColumn
     public TableColumn<Student, String> getFirstNameColumn() {
         TableColumn<Student, String> firstNameCol = new TableColumn<>("First Name");
         PropertyValueFactory<Student, String> firstNameCellValueFactory = new PropertyValueFactory<>("firstName");
@@ -116,7 +113,6 @@ public class StudentTableViewFactory {
         return firstNameCol;
     }
 
-    // Returns Last Name TableColumn
     public TableColumn<Student, String> getLastNameColumn() {
         TableColumn<Student, String> lastNameCol = new TableColumn<>("Last Name");
         PropertyValueFactory<Student, String> lastNameCellValueFactory = new PropertyValueFactory<>("lastName");
@@ -124,7 +120,6 @@ public class StudentTableViewFactory {
         return lastNameCol;
     }
 
-    // Returns Street TableColumn 
     public TableColumn<Student, String> getStreetColumn() {
         TableColumn<Student, String> streetCol = new TableColumn<>("Street");
         PropertyValueFactory<Student, String> streetCellValueFactory = new PropertyValueFactory<>("street");
@@ -132,7 +127,6 @@ public class StudentTableViewFactory {
         return streetCol;
     }
 
-    // Returns ZipCode TableColumn
     public TableColumn<Student, String> getZipCodeColumn() {
         TableColumn<Student, String> zipCodeCol = new TableColumn<>("Zip Code");
         PropertyValueFactory<Student, String> zipCodeCellValueFactory = new PropertyValueFactory<>("zipCode");
@@ -140,7 +134,6 @@ public class StudentTableViewFactory {
         return zipCodeCol;
     }
 
-    /* Returns City TableColumn */
     public TableColumn<Student, String> getCityColumn() {
         TableColumn<Student, String> cityCol = new TableColumn<>("City");
         PropertyValueFactory<Student, String> cityCellValueFactory = new PropertyValueFactory<>("city");
@@ -148,15 +141,13 @@ public class StudentTableViewFactory {
         return cityCol;
     }
 
-    // Returns Country TableColumn
     public TableColumn<Student, String> getCountryColumn() {
         TableColumn<Student, String> countryCol = new TableColumn<>("Country");
         PropertyValueFactory<Student, String> countryCellValueFactory = new PropertyValueFactory<>("country");
         countryCol.setCellValueFactory(countryCellValueFactory);
         return countryCol;
     }
-    
-        // Returns Country TableColumn
+
     public TableColumn<Student, String> getStudentIDColumn() {
         TableColumn<Student, String> studentIDCol = new TableColumn<>("StudentID");
         PropertyValueFactory<Student, String> studentIDCellValueFactory = new PropertyValueFactory<>("studentID");
@@ -164,102 +155,109 @@ public class StudentTableViewFactory {
         return studentIDCol;
     }
 
-      public void addIdColumn(TableView<Student> table) 
-    {
+    public void addIdColumn(TableView<Student> table) {
         table.getColumns().add(getIdColumn());
-    }   
-     
-    public void addFirstNameColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addFirstNameColumn(TableView<Student> table) {
         TableColumn<Student, String> firstNameCol = getFirstNameColumn();
         firstNameCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         firstNameCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setFirstName(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setFirstName(t.getNewValue());
+            s2.setFirstName(t.getNewValue());
+
         });
-         
+
         table.getColumns().add(firstNameCol);
-    }   
- 
-    public void addLastNameColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addLastNameColumn(TableView<Student> table) {
         TableColumn<Student, String> lastNameCol = getLastNameColumn();
         lastNameCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
-		lastNameCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-                    ((Student) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                            ).setLastName(t.getNewValue());
+        lastNameCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setLastName(t.getNewValue());
+            s2.setLastName(t.getNewValue());
         });
-         
+
         table.getColumns().add(lastNameCol);
-    }   
- 
-    public void addStreetColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addStreetColumn(TableView<Student> table) {
         TableColumn<Student, String> streetCol = getStreetColumn();
         streetCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         streetCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setStreet(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setStreet(t.getNewValue());
+            s2.setStreet(t.getNewValue());
         });
-         
+
         table.getColumns().add(streetCol);
-    }   
-     
-    public void addZipCodeColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addZipCodeColumn(TableView<Student> table) {
         TableColumn<Student, String> zipCodeCol = getZipCodeColumn();
         zipCodeCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         zipCodeCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setZipCode(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setZipCode(t.getNewValue());
+            s2.setZipCode(t.getNewValue());
         });
-                 
+
         table.getColumns().add(zipCodeCol);
-    }   
-     
-    public void addCityColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addCityColumn(TableView<Student> table) {
         TableColumn<Student, String> cityCol = getCityColumn();
         cityCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         cityCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setCity(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setCity(t.getNewValue());
+            s2.setCity(t.getNewValue());
         });
- 
+
         table.getColumns().add(cityCol);
-    }   
-     
-    public void addCountryColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addCountryColumn(TableView<Student> table) {
         TableColumn<Student, String> countryCol = getCountryColumn();
         countryCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         countryCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setCountry(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setCountry(t.getNewValue());
+            s2.setCountry(t.getNewValue());
         });
-         
+
         table.getColumns().add(countryCol);
-    }   
-     
-    public void addStudentIDColumn(TableView<Student> table) 
-    {
+    }
+
+    public void addStudentIDColumn(TableView<Student> table) {
         TableColumn<Student, String> studentIDCol = getStudentIDColumn();
         studentIDCol.setCellFactory(TextFieldTableCell.<Student>forTableColumn());
         studentIDCol.setOnEditCommit((CellEditEvent<Student, String> t) -> {
-            ((Student) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setStudentID(t.getNewValue());
+            Student s = ((Student) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Student s2 = this.controller.getModel().getStudentList().get(this.controller.getModel().getStudentList().indexOf(s));
+            s.setStudentID(t.getNewValue());
+            s2.setStudentID(t.getNewValue());
         });
-         
+
         table.getColumns().add(studentIDCol);
-    }  
-    
+    }
+
     public void prepopulateListWithDummyData() {
         Student p1 = new Student(Long.valueOf(1), "Mark", "Pearson", "First Avenue 2", "1200", "Los Angeles", "USA", "s1234123423");
         Student p2 = new Student(Long.valueOf(2), "Tom", "Hoover", "Kings Cross 3", "2350", "Denver", "USA", "s1234123424");

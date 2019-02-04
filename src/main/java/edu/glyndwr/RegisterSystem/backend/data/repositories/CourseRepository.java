@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edu.glyndwr.RegisterSystem.backend.data.repositories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;

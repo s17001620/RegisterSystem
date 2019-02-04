@@ -11,11 +11,9 @@ import lombok.Setter;
  *
  * @author Alexander Bruckbauer s17001620
  */
+    @Getter
+    @Setter
 public class CourseDateAttendenceWrapper {
-    @Getter
-    @Setter
     private CourseDate courseDate;
-    @Getter
-    @Setter
     private Attendence attendence;
 }

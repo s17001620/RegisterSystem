@@ -25,7 +25,6 @@ public class ProfileHeaderPaneFactory {
     public GridPane buildNewPersonDataPane(RegisterSystemMainViewController controller) {
         GridPane pane = new GridPane();
 
-        // Set the hgap and vgap properties
         pane.setHgap(10);
         pane.setVgap(5);
         controller.getStudentProfilBox().getItems().addAll(controller.getModel().getStudentList());

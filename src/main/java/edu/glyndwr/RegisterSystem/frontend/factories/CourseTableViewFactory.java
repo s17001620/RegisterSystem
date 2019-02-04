@@ -1,4 +1,3 @@
-
 package edu.glyndwr.RegisterSystem.frontend.factories;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
@@ -14,20 +13,21 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
-
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
 @Component
 public class CourseTableViewFactory {
+
     @Getter
     private ObservableList<Course> courseList;
     private RegisterSystemMainViewController controller;
-    
+
     public CourseTableViewFactory() {
         courseList = FXCollections.<Course>observableArrayList();
     }
+
     public TableView<Course> getPrepopulatedEditableTable(RegisterSystemMainViewController controller) {
         TableView<Course> table = new TableView<>();
         this.prepopulateListWithDummyData();
@@ -43,9 +43,8 @@ public class CourseTableViewFactory {
         addDescriptionColumn(table);
         return table;
     }
-    
-    
-        public TableView<Course> getNewEditableTable(RegisterSystemMainViewController controller) {
+
+    public TableView<Course> getNewEditableTable(RegisterSystemMainViewController controller) {
         TableView<Course> table = new TableView<>();
         this.controller = controller;
         table.getItems().addAll(getCourseList());
@@ -58,7 +57,7 @@ public class CourseTableViewFactory {
         addDescriptionColumn(table);
         return table;
     }
-    
+
     public TableColumn<Course, Long> getIdColumn() {
         TableColumn<Course, Long> idCol = new TableColumn<>("Id");
         PropertyValueFactory<Course, Long> idCellValueFactory = new PropertyValueFactory<>("id");
@@ -79,7 +78,7 @@ public class CourseTableViewFactory {
         codeCol.setCellValueFactory(codeCellValueFactory);
         return codeCol;
     }
-	
+
     public TableColumn<Course, String> getDescriptionColumn() {
         TableColumn<Course, String> descriptionCol = new TableColumn<>("Description");
         PropertyValueFactory<Course, String> descriptionCellValueFactory = new PropertyValueFactory<>("description");
@@ -87,51 +86,55 @@ public class CourseTableViewFactory {
         return descriptionCol;
     }
 
-       public void addIdColumn(TableView<Course> table) 
-    {
+    public void addIdColumn(TableView<Course> table) {
         table.getColumns().add(getIdColumn());
-    }   
-     
-    public void addNameColumn(TableView<Course> table) 
-    {
+    }
+
+    public void addNameColumn(TableView<Course> table) {
         TableColumn<Course, String> nameCol = getNameColumn();
         nameCol.setCellFactory(TextFieldTableCell.<Course>forTableColumn());
         nameCol.setOnEditCommit((CellEditEvent<Course, String> t) -> {
-            ((Course) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setName(t.getNewValue());
+            Course c = ((Course) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Course c2 = this.controller.getModel().getCourseList().get(this.controller.getModel().getCourseList().indexOf(c));
+            c.setName(t.getNewValue());
+            c2.setName(t.getNewValue());
         });
-         
+
         table.getColumns().add(nameCol);
-    }   
- 
-    public void addCodeColumn(TableView<Course> table) 
-    {
+    }
+
+    public void addCodeColumn(TableView<Course> table) {
         TableColumn<Course, String> codeCol = getCodeColumn();
         codeCol.setCellFactory(TextFieldTableCell.<Course>forTableColumn());
-		codeCol.setOnEditCommit((CellEditEvent<Course, String> t) -> {
-                    ((Course) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                            ).setCode(t.getNewValue());
+        codeCol.setOnEditCommit((CellEditEvent<Course, String> t) -> {
+            Course c = ((Course) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Course c2 = this.controller.getModel().getCourseList().get(this.controller.getModel().getCourseList().indexOf(c));
+            c.setCode(t.getNewValue());
+            c2.setCode(t.getNewValue());
+
         });
-         
+
         table.getColumns().add(codeCol);
-    }   
- 
-    public void addDescriptionColumn(TableView<Course> table) 
-    {
+    }
+
+    public void addDescriptionColumn(TableView<Course> table) {
         TableColumn<Course, String> descriptionCol = getDescriptionColumn();
         descriptionCol.setCellFactory(TextFieldTableCell.<Course>forTableColumn());
         descriptionCol.setOnEditCommit((CellEditEvent<Course, String> t) -> {
-            ((Course) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setDescription(t.getNewValue());
+            Course c = ((Course) t.getTableView().getItems().get(
+                    t.getTablePosition().getRow()));
+            Course c2 = this.controller.getModel().getCourseList().get(this.controller.getModel().getCourseList().indexOf(c));
+            c.setDescription(t.getNewValue());
+            c2.setDescription(t.getNewValue());
+
         });
-         
+
         table.getColumns().add(descriptionCol);
-    }  
-    
-        public void prepopulateListWithDummyData() {
+    }
+
+    public void prepopulateListWithDummyData() {
         Course p1 = new Course(Long.valueOf(1), "Databases", "DB6", "Oracle Databases");
         Course p2 = new Course(Long.valueOf(2), "Future and Emerging Technologies", "FET7", "New Technologies");
         Course p3 = new Course(Long.valueOf(3), "21st century Computing", "21CC", "Presentations and Homework");

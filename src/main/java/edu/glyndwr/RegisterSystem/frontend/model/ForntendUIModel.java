@@ -1,5 +1,3 @@
-
-
 package edu.glyndwr.RegisterSystem.frontend.model;
 
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence;
@@ -19,31 +17,22 @@ import org.springframework.stereotype.Component;
  * @author Alexander Bruckbauer s17001620
  */
 @Component
+@Getter
+@Setter
 public class ForntendUIModel {
-    @Getter
-    @Setter
+
     private ObservableList<CourseDate> courseDateList;
-    @Getter
-    @Setter
     private ObservableList<CourseMember> courseMemberList;
-    @Getter
-    @Setter
     private ObservableList<Attendence> attendenceList;
-    @Getter
-    @Setter
     private ObservableList<Student> studentList;
-    @Getter
-    @Setter
     private ObservableList<Course> courseList;
-    @Getter
-    @Setter
     private ObservableList<CourseDateAttendenceWrapper> wrappedAttendencesList;
-    
-    public ForntendUIModel(){
-        courseDateList = FXCollections.observableArrayList() ;
-        courseMemberList = FXCollections.observableArrayList() ;
-        attendenceList  = FXCollections.observableArrayList() ;
-        studentList = FXCollections.observableArrayList() ;
-        courseList  = FXCollections.observableArrayList() ;
+
+    public ForntendUIModel() {
+        courseDateList = FXCollections.observableArrayList();
+        courseMemberList = FXCollections.observableArrayList();
+        attendenceList = FXCollections.observableArrayList();
+        studentList = FXCollections.observableArrayList();
+        courseList = FXCollections.observableArrayList();
     }
 }

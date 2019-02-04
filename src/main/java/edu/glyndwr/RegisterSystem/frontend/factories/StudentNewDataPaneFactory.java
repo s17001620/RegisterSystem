@@ -16,12 +16,10 @@ import org.springframework.stereotype.Component;
 public class StudentNewDataPaneFactory {
 public GridPane buildNewPersonDataPane(RegisterSystemMainViewController controller){
        GridPane pane = new GridPane();
-         
-        // Set the hgap and vgap properties
+
         pane.setHgap(10);
         pane.setVgap(5);
-         
-        // Add the TextFields to the Pane
+  
         pane.addRow(0, new Label("First Name:"), controller.getFirstNameField());
         pane.addRow(1, new Label("Last Name:"), controller.getLastNameField());
         pane.addRow(2, new Label("Street:"), controller.getStreetField());
@@ -29,8 +27,7 @@ public GridPane buildNewPersonDataPane(RegisterSystemMainViewController controll
         pane.addRow(4, new Label("City:"), controller.getCityField());
         pane.addRow(5, new Label("Country:"), controller.getCountryField());
         pane.addRow(6, new Label("Student ID:"), controller.getStudentIDField());
-         
-        // Create the Add Button and add Event-Handler
+
         Button addButton = new Button("Add");       
         addButton.setOnAction((ActionEvent e) -> {
            controller.addStudent();
@@ -39,7 +36,7 @@ public GridPane buildNewPersonDataPane(RegisterSystemMainViewController controll
         deleteButton.setOnAction((ActionEvent e) -> {
             controller.deleteStudent();
         }); 
-        // Add the Add Button to the GridPane
+ 
         pane.add(addButton, 2, 0);
         pane.add(deleteButton, 1, 7);
      

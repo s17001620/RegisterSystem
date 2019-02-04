@@ -10,6 +10,8 @@ import edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFaca
 import edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel;
 import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -27,78 +29,43 @@ import org.springframework.stereotype.Component;
  *
  * @author Alexander Bruckbauer s17001620
  */
-@Component("fegisterSystemMainViewControllerNoFxml")
+@Component
+@Getter
+@Setter
 public class RegisterSystemMainViewController {
+
     @Autowired
     private RegistryService service;
     @Autowired
     private FrontendFactoryFacade frontendFactoryFacade;
     @Autowired
-    @Getter
     private ForntendUIModel model;
-    @Getter
-    @Setter
     private TableView<CourseDate> courseDateTable;
-    @Getter
-    @Setter
     private TableView<CourseMember> courseMemberTable;
-    @Getter
-    @Setter
     private TableView<Attendence> attendenceTable;
-    @Getter
-    @Setter
     private TableView<Student> studentTable;
-    @Getter
-    @Setter
     private TableView<Course> courseTable;
-    @Getter
-    @Setter
     private TableView<CourseDate> attendedCourseDateTable;
-    @Getter
-    @Setter
     private TableView<CourseDateAttendenceWrapper> wrappedAttendencesTable;
-    
-    @Getter
     private TextField firstNameField;
-    @Getter
     private TextField lastNameField;
-    @Getter
     private TextField streetField;
-    @Getter
     private TextField zipCodeField;
-    @Getter
     private TextField cityField;
-    @Getter
     private TextField countryField;
-    @Getter
     private TextField studentIDField;
-    @Getter
     private TextField nameField;
-    @Getter
     private TextField codeField;
-    @Getter
     private TextField descriptionField;
-    @Getter
     private ComboBox courseDateCourseBox;
-    @Getter
     private DatePicker courseDateDatePicker;
-    @Getter
     private ComboBox courseMemberCourseBox;
-    @Getter
     private ComboBox courseMemberMemberBox;
-    @Getter
     private ComboBox attendenceCourseMemberBox;
-    @Getter
     private ComboBox attendenceCourseDateBox;
-    @Getter
     private ComboBox studentProfilBox;
-    @Getter
     private ComboBox studentCourseBox;
-    @Getter
-    @Setter
     Label profileHeaderAddressLabel;
-    @Getter
-    @Setter
     private Label profileHeaderCourseLabel;
 
     public void initializeStage(Stage stage) {
@@ -118,9 +85,16 @@ public class RegisterSystemMainViewController {
         Arrays.sort(selectedIndices);
         for (int i = selectedIndices.length - 1; i >= 0; i--) {
             tsm.clearSelection(selectedIndices[i]);
-           Student student= studentTable.getItems().get(selectedIndices[i].intValue());
+            Student student = studentTable.getItems().get(selectedIndices[i].intValue());
             studentTable.getItems().remove(student);
             model.getStudentList().remove(student);
+            List<CourseMember> courseMemberToDelete = getModel().getCourseMemberList().stream().filter(m -> m.getStudent().equals(student)).collect(Collectors.toList());
+            courseMemberTable.getItems().removeAll(courseMemberToDelete);
+            getModel().getCourseMemberList().removeAll(courseMemberToDelete);
+            List<Attendence> attendenceToDelete = getModel().getAttendenceList().stream().filter(m -> courseMemberToDelete.contains(m.getCourseMember())).collect(Collectors.toList());
+            attendenceTable.getItems().removeAll(attendenceToDelete);
+            getModel().getAttendenceList().removeAll(attendenceToDelete);
+            getStudentProfilBox().getItems().remove(student);
         }
         studentTable.refresh();
     }
@@ -162,6 +136,16 @@ public class RegisterSystemMainViewController {
             Course course = courseTable.getItems().get(selectedIndices[i].intValue());
             courseTable.getItems().remove(course);
             model.getCourseList().remove(course);
+            List<CourseMember> courseMemberToDelete = getModel().getCourseMemberList().stream().filter(m -> m.getCourse().equals(course)).collect(Collectors.toList());
+            courseMemberTable.getItems().removeAll(courseMemberToDelete);
+            getModel().getCourseMemberList().removeAll(courseMemberToDelete);
+            List<Attendence> attendenceToDelete = getModel().getAttendenceList().stream().filter(m -> courseMemberToDelete.contains(m.getCourseMember())).collect(Collectors.toList());
+            attendenceTable.getItems().removeAll(attendenceToDelete);
+            getModel().getAttendenceList().removeAll(attendenceToDelete);
+            List<CourseDate> courseDateToDelete = getModel().getCourseDateList().stream().filter(m -> m.getCourse().equals(course)).collect(Collectors.toList());
+            courseDateTable.getItems().removeAll(courseDateToDelete);
+            getModel().getCourseDateList().removeAll(courseDateToDelete);
+            getStudentCourseBox().getItems().remove(course);
         }
         courseTable.refresh();
     }
@@ -189,15 +173,17 @@ public class RegisterSystemMainViewController {
                 currentId = p.getId();
             }
         }
-        CourseMember courseMember = new CourseMember(currentId + 1, (Course) courseMemberCourseBox.getValue(), (Student) courseMemberMemberBox.getValue());
-        for (CourseMember member : courseMemberTable.getItems()) {
-            if (member.getStudent().equals(courseMember.getStudent()) && member.getCourse().equals(courseMember.getCourse())) {
-                return;
+        if (null != courseMemberCourseBox.getValue() && null != courseMemberMemberBox.getValue()) {
+            CourseMember courseMember = new CourseMember(currentId + 1, (Course) courseMemberCourseBox.getValue(), (Student) courseMemberMemberBox.getValue());
+            for (CourseMember member : courseMemberTable.getItems()) {
+                if (member.getStudent().equals(courseMember.getStudent()) && member.getCourse().equals(courseMember.getCourse())) {
+                    return;
+                }
             }
+            courseMemberTable.getItems().add(courseMember);
+            model.getCourseMemberList().add(courseMember);
+            courseMemberTable.refresh();
         }
-        courseMemberTable.getItems().add(courseMember);
-        model.getCourseMemberList().add(courseMember);
-        courseMemberTable.refresh();
     }
 
     public void deleteCourseMember() {
@@ -206,17 +192,19 @@ public class RegisterSystemMainViewController {
             System.out.println("Please select a row to delete.");
             return;
         }
-        
-        
+
         ObservableList<Integer> list = tsm.getSelectedIndices();
         Integer[] selectedIndices = new Integer[list.size()];
         selectedIndices = list.toArray(selectedIndices);
         Arrays.sort(selectedIndices);
         for (int i = selectedIndices.length - 1; i >= 0; i--) {
             tsm.clearSelection(selectedIndices[i]);
-           CourseMember member =  courseMemberTable.getItems().get(selectedIndices[i].intValue());
-           courseMemberTable.getItems().remove(member);
-           model.getCourseMemberList().remove(member);
+            CourseMember member = courseMemberTable.getItems().get(selectedIndices[i].intValue());
+            courseMemberTable.getItems().remove(member);
+            model.getCourseMemberList().remove(member);
+            List<Attendence> attendenceToDelete = getModel().getAttendenceList().stream().filter(f -> f.getCourseMember().equals(member)).collect(Collectors.toList());
+            getModel().getAttendenceList().removeAll(attendenceToDelete);
+            attendenceTable.getItems().removeAll(attendenceToDelete);
         }
         courseMemberTable.refresh();
     }
@@ -254,6 +242,9 @@ public class RegisterSystemMainViewController {
             CourseDate date = courseDateTable.getItems().get(selectedIndices[i].intValue());
             courseDateTable.getItems().remove(date);
             model.getCourseDateList().remove(date);
+            List<Attendence> attendenceToDelete = getModel().getAttendenceList().stream().filter(f -> f.getCourseDate().equals(date)).collect(Collectors.toList());
+            getModel().getAttendenceList().removeAll(attendenceToDelete);
+            attendenceTable.getItems().removeAll(attendenceToDelete);
         }
         courseMemberTable.refresh();
     }
@@ -265,16 +256,18 @@ public class RegisterSystemMainViewController {
                 currentId = p.getId();
             }
         }
-        Attendence attendence = new Attendence(currentId + 1, (CourseDate) attendenceCourseDateBox.getValue(), (CourseMember) attendenceCourseMemberBox.getValue());
-        for (Attendence att : attendenceTable.getItems()) {
-            if (att.getCourseDate().equals(attendence.getCourseDate()) && att.getCourseMember().equals(attendence.getCourseMember())) {
-                return;
+        if (null != attendenceCourseDateBox.getValue() && null != attendenceCourseMemberBox.getValue()) {
+            Attendence attendence = new Attendence(currentId + 1, (CourseDate) attendenceCourseDateBox.getValue(), (CourseMember) attendenceCourseMemberBox.getValue());
+            for (Attendence att : attendenceTable.getItems()) {
+                if (att.getCourseDate().equals(attendence.getCourseDate()) && att.getCourseMember().equals(attendence.getCourseMember())) {
+                    return;
+                }
             }
+            attendence.setAttended(Boolean.TRUE);
+            attendenceTable.getItems().add(attendence);
+            model.getAttendenceList().add(attendence);
+            attendenceTable.refresh();
         }
-        attendence.setAttended(Boolean.TRUE);
-        attendenceTable.getItems().add(attendence);
-        model.getAttendenceList().add(attendence);
-        attendenceTable.refresh();
     }
 
     public void deleteAttendence() {
@@ -295,8 +288,8 @@ public class RegisterSystemMainViewController {
         }
         attendenceTable.refresh();
     }
-    
-    public void inititalizeFields(){
+
+    public void inititalizeFields() {
         firstNameField = new TextField();
         lastNameField = new TextField();
         streetField = new TextField();
