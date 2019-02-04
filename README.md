@@ -35,6 +35,7 @@ It is built with:
 
 ### Usage
 The UI has 6 tabs to enter information.
+The tabs must be filled from left to right, since the more left tabs create information for the right ones to use.
 
 #### Register Student
 Students base data is entered here by filling the textfields and clicking the "Add" button.

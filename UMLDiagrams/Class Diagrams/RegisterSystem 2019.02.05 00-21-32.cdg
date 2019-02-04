@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="RegisterSystem">
+  <ClassDiagramComponents>
+    <Class name="Attendence" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="attended" type="Boolean" visibility="package"/>
+        <Field name="courseDate" type="CourseDate" visibility="private"/>
+        <Field name="courseMember" type="CourseMember" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="long" name="id"/>
+          <Argument type="CourseDate" name="courseDate"/>
+          <Argument type="CourseMember" name="courseMember"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Course" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="code" type="String" visibility="private"/>
+        <Field name="description" type="String" visibility="private"/>
+        <Field name="tutor" type="Tutor" visibility="private"/>
+        <Field name="datesAttended" type="Set&lt;CourseDate&gt;" visibility="private"/>
+        <Field name="members" type="Set&lt;CourseMember&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Long" name="id"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="code"/>
+          <Argument type="String" name="description"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CourseDate" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="courseDay" type="LocalDate" visibility="private"/>
+        <Field name="course" type="Course" visibility="private"/>
+        <Field name="datesAttended" type="Set&lt;Attendence&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="long" name="id"/>
+          <Argument type="Course" name="course"/>
+          <Argument type="LocalDate" name="courseDay"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CourseMember" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="student" type="Student" visibility="private"/>
+        <Field name="course" type="Course" visibility="private"/>
+        <Field name="datesAttended" type="Set&lt;Attendence&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="long" name="id"/>
+          <Argument type="Course" name="course"/>
+          <Argument type="Student" name="student"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Student" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="studentID" type="String" visibility="package"/>
+        <Field name="courses" type="Set&lt;CourseMember&gt;" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Long" name="id"/>
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+          <Argument type="String" name="street"/>
+          <Argument type="String" name="zipCode"/>
+          <Argument type="String" name="city"/>
+          <Argument type="String" name="country"/>
+          <Argument type="String" name="studentID"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Long" name="id"/>
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+          <Argument type="String" name="street"/>
+          <Argument type="String" name="zipCode"/>
+          <Argument type="String" name="city"/>
+          <Argument type="String" name="country"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Tutor" package="edu.glyndwr.RegisterSystem.backend.data.entities.implementations" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="expertise" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Long" name="id"/>
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+          <Argument type="String" name="street"/>
+          <Argument type="String" name="zipCode"/>
+          <Argument type="String" name="city"/>
+          <Argument type="String" name="country"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="GenericEntity" package="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses" visibility="public" isAbstract="true" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="id" type="Long" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Person" package="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses" visibility="public" isAbstract="true" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="firstName" type="String" visibility="protected"/>
+        <Field name="lastName" type="String" visibility="protected"/>
+        <Field name="street" type="String" visibility="protected"/>
+        <Field name="zipCode" type="String" visibility="protected"/>
+        <Field name="city" type="String" visibility="protected"/>
+        <Field name="country" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Long" name="id"/>
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+          <Argument type="String" name="street"/>
+          <Argument type="String" name="zipCode"/>
+          <Argument type="String" name="city"/>
+          <Argument type="String" name="country"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Interface name="AttendenceRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByCourseDate" returnType="List&lt;Attendence&gt;" visibility="package">
+          <Argument type="CourseDate" name="courseDate"/>
+        </Method>
+        <Method name="findByCourseMember" returnType="List&lt;Attendence&gt;" visibility="package">
+          <Argument type="CourseMember" name="courseMember"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="CourseDateRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByCourse" returnType="CourseDate" visibility="package">
+          <Argument type="Course" name="course"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="CourseMemberRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="620.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByStudent" returnType="List&lt;CourseMember&gt;" visibility="package">
+          <Argument type="Student" name="student"/>
+        </Method>
+        <Method name="findByCourse" returnType="List&lt;CourseMember&gt;" visibility="package">
+          <Argument type="Course" name="course"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="CourseRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="920.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByDescriptionContaining" returnType="List&lt;Course&gt;" visibility="package">
+          <Argument type="String" name="description"/>
+        </Method>
+        <Method name="findByCode" returnType="Course" visibility="package">
+          <Argument type="String" name="code"/>
+        </Method>
+        <Method name="findByNameContaining" returnType="List&lt;Course&gt;" visibility="package">
+          <Argument type="String" name="name"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="StudentRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="1220.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByLastNameAndFirstName" returnType="List&lt;Student&gt;" visibility="package">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByLastNameOrFirstName" returnType="List&lt;Student&gt;" visibility="package">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByFirstNameStartingWith" returnType="List&lt;Student&gt;" visibility="package">
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByLastNameStartingWith" returnType="List&lt;Student&gt;" visibility="package">
+          <Argument type="String" name="lastName"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="TutorRepository" package="edu.glyndwr.RegisterSystem.backend.data.repositories" visibility="public" xPosition="1520.0" yPosition="420.0">
+      <Methods>
+        <Method name="findByLastNameAndFirstName" returnType="List&lt;Tutor&gt;" visibility="package">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByLastNameOrFirstName" returnType="List&lt;Tutor&gt;" visibility="package">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByFirstNameStartingWith" returnType="List&lt;Tutor&gt;" visibility="package">
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findByLastNameStartingWith" returnType="List&lt;Tutor&gt;" visibility="package">
+          <Argument type="String" name="lastName"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Class name="RegistryService" package="edu.glyndwr.RegisterSystem.backend.data.services" visibility="public" xPosition="1820.0" yPosition="420.0">
+      <Fields>
+        <Field name="attendenceRepo" type="AttendenceRepository" visibility="private"/>
+        <Field name="courseDateRepo" type="CourseDateRepository" visibility="private"/>
+        <Field name="courseMemberRepo" type="CourseMemberRepository" visibility="private"/>
+        <Field name="courseRepo" type="CourseRepository" visibility="private"/>
+        <Field name="studentRepo" type="StudentRepository" visibility="private"/>
+        <Field name="tutorrepo" type="TutorRepository" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="findAllStudents" returnType="List&lt;Student&gt;" visibility="public"/>
+        <Method name="findStudentById" returnType="Student" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveStudent" returnType="void" visibility="public">
+          <Argument type="Student" name="entity"/>
+        </Method>
+        <Method name="saveAllStudents" returnType="void" visibility="public">
+          <Argument type="List&lt;Student&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteStudent" returnType="void" visibility="public">
+          <Argument type="Student" name="entity"/>
+        </Method>
+        <Method name="deleteAllStudents" returnType="void" visibility="public">
+          <Argument type="List&lt;Student&gt;" name="entities"/>
+        </Method>
+        <Method name="findCourseById" returnType="Course" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveCourse" returnType="void" visibility="public">
+          <Argument type="Course" name="entity"/>
+        </Method>
+        <Method name="saveAllCourses" returnType="void" visibility="public">
+          <Argument type="List&lt;Course&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteCourse" returnType="void" visibility="public">
+          <Argument type="Course" name="entity"/>
+        </Method>
+        <Method name="deleteAllCourses" returnType="void" visibility="public">
+          <Argument type="List&lt;Course&gt;" name="entities"/>
+        </Method>
+        <Method name="findAttendenceById" returnType="Attendence" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveAttendence" returnType="void" visibility="public">
+          <Argument type="Attendence" name="entity"/>
+        </Method>
+        <Method name="saveAllAttendences" returnType="void" visibility="public">
+          <Argument type="List&lt;Attendence&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteAttendence" returnType="void" visibility="public">
+          <Argument type="Attendence" name="entity"/>
+        </Method>
+        <Method name="deleteAllAttendences" returnType="void" visibility="public">
+          <Argument type="List&lt;Attendence&gt;" name="entities"/>
+        </Method>
+        <Method name="findCourseDateById" returnType="CourseDate" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveCourseDate" returnType="void" visibility="public">
+          <Argument type="CourseDate" name="entity"/>
+        </Method>
+        <Method name="saveAllCourseDates" returnType="void" visibility="public">
+          <Argument type="List&lt;CourseDate&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteCourseDate" returnType="void" visibility="public">
+          <Argument type="CourseDate" name="entity"/>
+        </Method>
+        <Method name="deleteAllCourseDates" returnType="void" visibility="public">
+          <Argument type="List&lt;CourseDate&gt;" name="entities"/>
+        </Method>
+        <Method name="findCourseMemberById" returnType="CourseMember" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveCourseMember" returnType="void" visibility="public">
+          <Argument type="CourseMember" name="entity"/>
+        </Method>
+        <Method name="saveAllCourseMembers" returnType="void" visibility="public">
+          <Argument type="List&lt;CourseMember&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteCourseMember" returnType="void" visibility="public">
+          <Argument type="CourseMember" name="entity"/>
+        </Method>
+        <Method name="deleteAllCourseMembers" returnType="void" visibility="public">
+          <Argument type="List&lt;CourseMember&gt;" name="entities"/>
+        </Method>
+        <Method name="findTutorById" returnType="Tutor" visibility="public">
+          <Argument type="Long" name="id"/>
+        </Method>
+        <Method name="saveTutor" returnType="void" visibility="public">
+          <Argument type="Tutor" name="entity"/>
+        </Method>
+        <Method name="saveAllTutors" returnType="void" visibility="public">
+          <Argument type="List&lt;Tutor&gt;" name="entities"/>
+        </Method>
+        <Method name="deleteTutor" returnType="void" visibility="public">
+          <Argument type="Tutor" name="entity"/>
+        </Method>
+        <Method name="deleteAllTutors" returnType="void" visibility="public">
+          <Argument type="List&lt;Tutor&gt;" name="entities"/>
+        </Method>
+        <Method name="findAttendenceByCourseDate" returnType="List&lt;Attendence&gt;" visibility="public">
+          <Argument type="CourseDate" name="courseDate"/>
+        </Method>
+        <Method name="findAttendenceByCourseMember" returnType="List&lt;Attendence&gt;" visibility="public">
+          <Argument type="CourseMember" name="courseMember"/>
+        </Method>
+        <Method name="findCourseDateByCourse" returnType="CourseDate" visibility="public">
+          <Argument type="Course" name="course"/>
+        </Method>
+        <Method name="findCourseMemberByStudent" returnType="List&lt;CourseMember&gt;" visibility="public">
+          <Argument type="Student" name="student"/>
+        </Method>
+        <Method name="findCourseMemberByCourse" returnType="List&lt;CourseMember&gt;" visibility="public">
+          <Argument type="Course" name="course"/>
+        </Method>
+        <Method name="findCourseByDescriptionContaining" returnType="List&lt;Course&gt;" visibility="public">
+          <Argument type="String" name="description"/>
+        </Method>
+        <Method name="findCourseByCode" returnType="Course" visibility="public">
+          <Argument type="String" name="code"/>
+        </Method>
+        <Method name="findCourseByNameContaining" returnType="List&lt;Course&gt;" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="findStudentByLastNameAndFirstName" returnType="List&lt;Student&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findStudentByLastNameOrFirstName" returnType="List&lt;Student&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findStudentByFirstNameStartingWith" returnType="List&lt;Student&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+        </Method>
+        <Method name="findStudentByLastNameStartingWith" returnType="List&lt;Student&gt;" visibility="public">
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findTutorByLastNameAndFirstName" returnType="List&lt;Tutor&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findTutorByLastNameOrFirstName" returnType="List&lt;Tutor&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+          <Argument type="String" name="lastName"/>
+        </Method>
+        <Method name="findTutorByFirstNameStartingWith" returnType="List&lt;Tutor&gt;" visibility="public">
+          <Argument type="String" name="firstName"/>
+        </Method>
+        <Method name="findTutorByLastNameStartingWith" returnType="List&lt;Tutor&gt;" visibility="public">
+          <Argument type="String" name="lastName"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="RegisterSystemConfig" package="edu.glyndwr.RegisterSystem.configuration" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="RegisterSystemMainViewController" package="edu.glyndwr.RegisterSystem.frontend.controller" visibility="public" xPosition="20.0" yPosition="820.0">
+      <Fields>
+        <Field name="service" type="RegistryService" visibility="private"/>
+        <Field name="frontendFactoryFacade" type="FrontendFactoryFacade" visibility="private"/>
+        <Field name="model" type="ForntendUIModel" visibility="private"/>
+        <Field name="courseDateTable" type="TableView&lt;CourseDate&gt;" visibility="private"/>
+        <Field name="courseMemberTable" type="TableView&lt;CourseMember&gt;" visibility="private"/>
+        <Field name="attendenceTable" type="TableView&lt;Attendence&gt;" visibility="private"/>
+        <Field name="studentTable" type="TableView&lt;Student&gt;" visibility="private"/>
+        <Field name="courseTable" type="TableView&lt;Course&gt;" visibility="private"/>
+        <Field name="attendedCourseDateTable" type="TableView&lt;CourseDate&gt;" visibility="private"/>
+        <Field name="wrappedAttendencesTable" type="TableView&lt;CourseDateAttendenceWrapper&gt;" visibility="private"/>
+        <Field name="firstNameField" type="TextField" visibility="private"/>
+        <Field name="lastNameField" type="TextField" visibility="private"/>
+        <Field name="streetField" type="TextField" visibility="private"/>
+        <Field name="zipCodeField" type="TextField" visibility="private"/>
+        <Field name="cityField" type="TextField" visibility="private"/>
+        <Field name="countryField" type="TextField" visibility="private"/>
+        <Field name="studentIDField" type="TextField" visibility="private"/>
+        <Field name="nameField" type="TextField" visibility="private"/>
+        <Field name="codeField" type="TextField" visibility="private"/>
+        <Field name="descriptionField" type="TextField" visibility="private"/>
+        <Field name="courseDateCourseBox" type="ComboBox" visibility="private"/>
+        <Field name="courseDateDatePicker" type="DatePicker" visibility="private"/>
+        <Field name="courseMemberCourseBox" type="ComboBox" visibility="private"/>
+        <Field name="courseMemberMemberBox" type="ComboBox" visibility="private"/>
+        <Field name="attendenceCourseMemberBox" type="ComboBox" visibility="private"/>
+        <Field name="attendenceCourseDateBox" type="ComboBox" visibility="private"/>
+        <Field name="studentProfilBox" type="ComboBox" visibility="private"/>
+        <Field name="studentCourseBox" type="ComboBox" visibility="private"/>
+        <Field name="profileHeaderAddressLabel" type="Label" visibility="package"/>
+        <Field name="profileHeaderCourseLabel" type="Label" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="initializeStage" returnType="void" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="deleteStudent" returnType="void" visibility="public"/>
+        <Method name="addStudent" returnType="void" visibility="public"/>
+        <Method name="deleteCourse" returnType="void" visibility="public"/>
+        <Method name="addCourse" returnType="void" visibility="public"/>
+        <Method name="addCourseMember" returnType="void" visibility="public"/>
+        <Method name="deleteCourseMember" returnType="void" visibility="public"/>
+        <Method name="addCourseDate" returnType="void" visibility="public"/>
+        <Method name="deleteCourseDate" returnType="void" visibility="public"/>
+        <Method name="addAttendence" returnType="void" visibility="public"/>
+        <Method name="deleteAttendence" returnType="void" visibility="public"/>
+        <Method name="inititalizeFields" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="AttendenceNewDataPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewAttendenceDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AttendenceTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getNewTable" returnType="TableView&lt;Attendence&gt;" visibility="public"/>
+        <Method name="getIdColumn" returnType="TableColumn&lt;Attendence, Long&gt;" visibility="public"/>
+        <Method name="getCourseDateColumn" returnType="TableColumn&lt;Attendence, CourseDate&gt;" visibility="public"/>
+        <Method name="getCourseMemberColumn" returnType="TableColumn&lt;Attendence, CourseMember&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CourseDateNewDataPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewCourseDateDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CourseDateTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getNewTable" returnType="TableView&lt;CourseDate&gt;" visibility="public"/>
+        <Method name="getIdColumn" returnType="TableColumn&lt;CourseDate, Long&gt;" visibility="public"/>
+        <Method name="getCourseDayColumn" returnType="TableColumn&lt;CourseDate, LocalDate&gt;" visibility="public"/>
+        <Method name="getCourseColumn" returnType="TableColumn&lt;CourseDate, Course&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CourseMemberNewDataPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewCourseMemberDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CourseMemberTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getNewTable" returnType="TableView&lt;CourseMember&gt;" visibility="public"/>
+        <Method name="getIdColumn" returnType="TableColumn&lt;CourseMember, Long&gt;" visibility="public"/>
+        <Method name="getStudentColumn" returnType="TableColumn&lt;CourseMember, Student&gt;" visibility="public"/>
+        <Method name="getCourseColumn" returnType="TableColumn&lt;CourseMember, Course&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CourseNewDataPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="2120.0" yPosition="820.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewCourseDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CourseTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="20.0" yPosition="1220.0">
+      <Fields>
+        <Field name="courseList" type="ObservableList&lt;Course&gt;" visibility="private"/>
+        <Field name="controller" type="RegisterSystemMainViewController" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getPrepopulatedEditableTable" returnType="TableView&lt;Course&gt;" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+        <Method name="getNewEditableTable" returnType="TableView&lt;Course&gt;" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+        <Method name="getIdColumn" returnType="TableColumn&lt;Course, Long&gt;" visibility="public"/>
+        <Method name="getNameColumn" returnType="TableColumn&lt;Course, String&gt;" visibility="public"/>
+        <Method name="getCodeColumn" returnType="TableColumn&lt;Course, String&gt;" visibility="public"/>
+        <Method name="getDescriptionColumn" returnType="TableColumn&lt;Course, String&gt;" visibility="public"/>
+        <Method name="addIdColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Course&gt;" name="table"/>
+        </Method>
+        <Method name="addNameColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Course&gt;" name="table"/>
+        </Method>
+        <Method name="addCodeColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Course&gt;" name="table"/>
+        </Method>
+        <Method name="addDescriptionColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Course&gt;" name="table"/>
+        </Method>
+        <Method name="prepopulateListWithDummyData" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FrontendFactoryFacade" package="edu.glyndwr.RegisterSystem.frontend.factories.facades" visibility="public" xPosition="320.0" yPosition="1220.0">
+      <Fields>
+        <Field name="attendenceTableViewFactory" type="AttendenceTableViewFactory" visibility="private"/>
+        <Field name="attendenceNewDataPaneFactory" type="AttendenceNewDataPaneFactory" visibility="private"/>
+        <Field name="courseDateTableViewFactory" type="CourseDateTableViewFactory" visibility="private"/>
+        <Field name="courseDateNewDataPaneFactory" type="CourseDateNewDataPaneFactory" visibility="private"/>
+        <Field name="courseMemberTableViewFactory" type="CourseMemberTableViewFactory" visibility="private"/>
+        <Field name="courseMemberNewDataPaneFactory" type="CourseMemberNewDataPaneFactory" visibility="private"/>
+        <Field name="studentTableViewFactory" type="StudentTableViewFactory" visibility="private"/>
+        <Field name="studentNewDataPaneFactory" type="StudentNewDataPaneFactory" visibility="private"/>
+        <Field name="courseTableViewFactory" type="CourseTableViewFactory" visibility="private"/>
+        <Field name="courseNewDataPaneFactory" type="CourseNewDataPaneFactory" visibility="private"/>
+        <Field name="profileDataTableViewFactory" type="ProfileDataTableViewFactory" visibility="private"/>
+        <Field name="profileHeaderPaneFactory" type="ProfileHeaderPaneFactory" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="buildFrontendUI" returnType="Stage" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+          <Argument type="Stage" name="stage"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ProfileDataTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="620.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getNewTable" returnType="TableView&lt;CourseDateAttendenceWrapper&gt;" visibility="public"/>
+        <Method name="getCourseDateColumn" returnType="TableColumn&lt;CourseDateAttendenceWrapper, CourseDate&gt;" visibility="public"/>
+        <Method name="getCourseAttendenceColumn" returnType="TableColumn&lt;CourseDateAttendenceWrapper, Attendence&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ProfileHeaderPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="920.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewPersonDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="StudentNewDataPaneFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="1220.0" yPosition="1220.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="buildNewPersonDataPane" returnType="GridPane" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="StudentTableViewFactory" package="edu.glyndwr.RegisterSystem.frontend.factories" visibility="public" xPosition="1520.0" yPosition="1220.0">
+      <Fields>
+        <Field name="studentList" type="ObservableList&lt;Student&gt;" visibility="private"/>
+        <Field name="controller" type="RegisterSystemMainViewController" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getPrepopulatedTable" returnType="TableView&lt;Student&gt;" visibility="public"/>
+        <Method name="getPrepopulatedEditableTable" returnType="TableView&lt;Student&gt;" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+        <Method name="getNewTable" returnType="TableView&lt;Student&gt;" visibility="public"/>
+        <Method name="getNewEditableTable" returnType="TableView&lt;Student&gt;" visibility="public">
+          <Argument type="RegisterSystemMainViewController" name="controller"/>
+        </Method>
+        <Method name="getStudentList" returnType="ObservableList&lt;Student&gt;" visibility="public"/>
+        <Method name="getStudentList" returnType="void" visibility="public">
+          <Argument type="ObservableList&lt;Student&gt;" name="studentList"/>
+        </Method>
+        <Method name="getIdColumn" returnType="TableColumn&lt;Student, Long&gt;" visibility="public"/>
+        <Method name="getFirstNameColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getLastNameColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getStreetColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getZipCodeColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getCityColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getCountryColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="getStudentIDColumn" returnType="TableColumn&lt;Student, String&gt;" visibility="public"/>
+        <Method name="addIdColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addFirstNameColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addLastNameColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addStreetColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addZipCodeColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addCityColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addCountryColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="addStudentIDColumn" returnType="void" visibility="public">
+          <Argument type="TableView&lt;Student&gt;" name="table"/>
+        </Method>
+        <Method name="prepopulateListWithDummyData" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ForntendUIModel" package="edu.glyndwr.RegisterSystem.frontend.model" visibility="public" xPosition="1820.0" yPosition="1220.0">
+      <Fields>
+        <Field name="courseDateList" type="ObservableList&lt;CourseDate&gt;" visibility="private"/>
+        <Field name="courseMemberList" type="ObservableList&lt;CourseMember&gt;" visibility="private"/>
+        <Field name="attendenceList" type="ObservableList&lt;Attendence&gt;" visibility="private"/>
+        <Field name="studentList" type="ObservableList&lt;Student&gt;" visibility="private"/>
+        <Field name="courseList" type="ObservableList&lt;Course&gt;" visibility="private"/>
+        <Field name="wrappedAttendencesList" type="ObservableList&lt;CourseDateAttendenceWrapper&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="CourseDateAttendenceWrapper" package="edu.glyndwr.RegisterSystem.frontend.model.wrapper" visibility="public" xPosition="2120.0" yPosition="1220.0">
+      <Fields>
+        <Field name="courseDate" type="CourseDate" visibility="private"/>
+        <Field name="attendence" type="Attendence" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="RegisterSystemApplication" package="edu.glyndwr.RegisterSystem" visibility="public" xPosition="20.0" yPosition="1620.0">
+      <Fields>
+        <Field name="context" type="ConfigurableApplicationContext" visibility="private"/>
+        <Field name="fegisterSystemMainViewControllerNoFxml" type="RegisterSystemMainViewController" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="primaryStage"/>
+        </Method>
+        <Method name="init" returnType="void" visibility="public"/>
+        <Method name="stop" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseList" source="edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Course&gt;"/>
+    <HasRelation name="members" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;CourseMember&gt;"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDate" source="edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentNewDataPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.StudentNewDataPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEntity"/>
+    <HasRelation name="courseMemberNewDataPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberNewDataPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="datesAttended" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;Attendence&gt;"/>
+    <HasRelation name="courseMemberRepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseMemberRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseMemberTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseMemberRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="course" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.AttendenceRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="controller" source="edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendedCourseDateTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentRepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.StudentRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendenceTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="wrappedAttendencesTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceNewDataPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseDateRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendenceTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.Person" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEntity"/>
+    <HasRelation name="tutorrepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.TutorRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="frontendFactoryFacade" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.StudentRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="datesAttended" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;Attendence&gt;"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.StudentNewDataPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseMemberRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="controller" source="edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseMember" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="datesAttended" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;CourseDate&gt;"/>
+    <HasRelation name="courseMemberTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Tutor" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.Person"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEntity"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEntity"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Course&gt;"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseNewDataPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDateTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Tutor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="profileHeaderPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.ProfileHeaderPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.ProfileHeaderPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="wrappedAttendencesList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;CourseDateAttendenceWrapper&gt;"/>
+    <HasRelation name="courseDateRepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseDateRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberNewDataPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDateTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseDateTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendenceList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Attendence&gt;"/>
+    <HasRelation name="courseTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseDateTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="fegisterSystemMainViewControllerNoFxml" source="edu.glyndwr.RegisterSystem.RegisterSystemApplication" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.AttendenceRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="profileDataTableViewFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.ProfileDataTableViewFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.repositories.TutorRepository" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Tutor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="course" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDateNewDataPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseDateNewDataPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="tutor" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Tutor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDate" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.CourseDateNewDataPaneFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseDateList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;CourseDate&gt;"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentTable" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseNewDataPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.CourseNewDataPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendenceNewDataPaneFactory" source="edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade" target="edu.glyndwr.RegisterSystem.frontend.factories.AttendenceNewDataPaneFactory" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="courseMemberList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;CourseMember&gt;"/>
+    <HasRelation name="courses" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="Set&lt;CourseMember&gt;"/>
+    <HasRelation name="attendence" source="edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Attendence" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="attendenceRepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.AttendenceRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.ProfileDataTableViewFactory" target="edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentList" source="edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Student&gt;"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.GenericEntity"/>
+    <UseRelation source="edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory" target="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="student" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="studentList" source="edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory" target="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ObservableList&lt;Student&gt;"/>
+    <HasRelation name="courseRepo" source="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" target="edu.glyndwr.RegisterSystem.backend.data.repositories.CourseRepository" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="service" source="edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController" target="edu.glyndwr.RegisterSystem.backend.data.services.RegistryService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student" target="edu.glyndwr.RegisterSystem.backend.data.entities.superclasses.Person"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
