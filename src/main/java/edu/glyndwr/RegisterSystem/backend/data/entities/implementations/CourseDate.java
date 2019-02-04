@@ -46,6 +46,6 @@ public class CourseDate  extends GenericEntity implements Serializable{
        public String toString(){
            return this.course.getName()+", "+this.courseDay.toString();
        }
-
+     
 }
 

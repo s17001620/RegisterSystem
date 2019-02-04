@@ -11,6 +11,8 @@ import edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberNewDataPaneFact
 import edu.glyndwr.RegisterSystem.frontend.factories.CourseMemberTableViewFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.CourseNewDataPaneFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.CourseTableViewFactory;
+import edu.glyndwr.RegisterSystem.frontend.factories.ProfileDataTableViewFactory;
+import edu.glyndwr.RegisterSystem.frontend.factories.ProfileHeaderPaneFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.StudentNewDataPaneFactory;
 import edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory;
 import javafx.scene.Scene;
@@ -49,6 +51,10 @@ public class FrontendFactoryFacade {
     private CourseTableViewFactory courseTableViewFactory;
     @Autowired
     private CourseNewDataPaneFactory courseNewDataPaneFactory;
+    @Autowired
+    private ProfileDataTableViewFactory profileDataTableViewFactory;
+    @Autowired
+    private ProfileHeaderPaneFactory profileHeaderPaneFactory;
     
     public Stage buildFrontendUI(RegisterSystemMainViewControllerNoFxml controller, Stage stage){
         VBox root = new VBox();
@@ -59,6 +65,7 @@ public class FrontendFactoryFacade {
         GridPane courseNewDataPane;
         GridPane courseDateNewDataPane;
         GridPane attendenceNewDataPane;
+        GridPane profilAttendenceDataPane;
         
         controller.setStudentTable(studentTableViewFactory.getPrepopulatedEditableTable(controller));
         studentNewDataPane = studentNewDataPaneFactory.buildNewPersonDataPane(controller);
@@ -78,6 +85,10 @@ public class FrontendFactoryFacade {
         controller.setAttendenceTable(attendenceTableViewFactory.getNewTable());
         controller.getAttendenceTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         attendenceNewDataPane = attendenceNewDataPaneFactory.buildNewAttendenceDataPane(controller);
+        
+        controller.setWrappedAttendencesTable(profileDataTableViewFactory.getNewTable());
+        controller.getWrappedAttendencesTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
+        profilAttendenceDataPane = profileHeaderPaneFactory.buildNewPersonDataPane(controller);
         
         TabPane tabPane = new TabPane();
         Tab studentTab = new Tab();
@@ -114,6 +125,14 @@ public class FrontendFactoryFacade {
         attendencePane.getChildren().addAll(attendenceNewDataPane, controller.getAttendenceTable());
         attendenceTab.setContent(attendencePane);
         tabPane.getTabs().add(attendenceTab);
+        
+        Tab profileTab = new Tab();
+        profileTab.setText("Profile");
+        FlowPane profilePane = new FlowPane();
+        profilePane.getChildren().addAll(profilAttendenceDataPane, controller.getWrappedAttendencesTable());
+        profileTab.setContent(profilePane);
+        tabPane.getTabs().add(profileTab);
+        
         
         root.getChildren().addAll(tabPane);
         root.setSpacing(5);

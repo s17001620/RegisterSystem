@@ -7,6 +7,7 @@ import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Course;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseDate;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMember;
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
+import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class ForntendUIModel {
     @Getter
     @Setter
     private ObservableList<Course> courseList;
+    @Getter
+    @Setter
+    private ObservableList<CourseDateAttendenceWrapper> wrappedAttendencesList;
     
     public ForntendUIModel(){
         courseDateList = FXCollections.observableArrayList() ;

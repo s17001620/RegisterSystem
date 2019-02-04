@@ -38,6 +38,14 @@ public class Attendence extends GenericEntity implements Serializable{
         this.courseMember = courseMember;
     }
     
-    
+       public String toString(){
+          String stud =  this.courseMember.getStudent().toString();
+          String attended =" attended the course ";
+          if(!this.attended){
+               attended ="die NOT attend the course ";
+          }
+          String course = this.getCourseDate().getCourse().toString()+" on "+this.courseDate.getCourseDay().toString();
+          return stud + attended +course;
+       }
     
 }

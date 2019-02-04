@@ -7,10 +7,12 @@ import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.CourseMe
 import edu.glyndwr.RegisterSystem.backend.data.entities.implementations.Student;
 import edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade;
 import edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel;
+import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
 import java.util.Arrays;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
@@ -47,7 +49,13 @@ public class RegisterSystemMainViewControllerNoFxml {
     @Getter
     @Setter
     private TableView<Course> courseTable;
-
+    @Getter
+    @Setter
+    private TableView<CourseDate> attendedCourseDateTable;
+    @Getter
+    @Setter
+    private TableView<CourseDateAttendenceWrapper> wrappedAttendencesTable;
+    
     @Getter
     private TextField firstNameField;
     @Getter
@@ -80,6 +88,16 @@ public class RegisterSystemMainViewControllerNoFxml {
     private ComboBox attendenceCourseMemberBox;
     @Getter
     private ComboBox attendenceCourseDateBox;
+    @Getter
+    private ComboBox studentProfilBox;
+    @Getter
+    private ComboBox studentCourseBox;
+    @Getter
+    @Setter
+    Label profileHeaderAddressLabel;
+    @Getter
+    @Setter
+    private Label profileHeaderCourseLabel;
 
     public void initializeStage(Stage stage) {
         inititalizeFields();
@@ -251,6 +269,7 @@ public class RegisterSystemMainViewControllerNoFxml {
                 return;
             }
         }
+        attendence.setAttended(Boolean.TRUE);
         attendenceTable.getItems().add(attendence);
         model.getAttendenceList().add(attendence);
         attendenceTable.refresh();
@@ -292,5 +311,9 @@ public class RegisterSystemMainViewControllerNoFxml {
         courseMemberMemberBox = new ComboBox();
         attendenceCourseMemberBox = new ComboBox();
         attendenceCourseDateBox = new ComboBox();
+        studentProfilBox = new ComboBox();
+        studentCourseBox = new ComboBox();
+        profileHeaderAddressLabel = new Label();
+        profileHeaderCourseLabel = new Label();
     }
 }
