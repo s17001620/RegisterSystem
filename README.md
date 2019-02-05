@@ -59,7 +59,8 @@ select a course and a date and add a date to the course date list.
 
 #### Book Attendence
 An attending course member can be added to a course date here.
-Select course date and course Member and her/him to the attending members
+Select course date and course Member and her/him to the attending members.
+
 ![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/bookAttendence.PNG)
 
 #### Profile
