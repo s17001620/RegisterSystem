@@ -36,26 +36,26 @@ public class ProfileHeaderPaneFactory {
         controller.getStudentProfilBox().setOnAction(event -> {
             Student headerStudent = (Student) controller.getStudentProfilBox().getValue();
             controller.getProfileHeaderAddressLabel().setText(headerStudent.getStreet() + " " + headerStudent.getZipCode() + " " + headerStudent.getCity() + " " + headerStudent.getCountry());
-            String courseString = controller.getModel().getCourseMemberList().stream().filter(f -> f.getStudent().equals(headerStudent)).map(e -> e.getCourse().getName()).collect( Collectors.joining(", "));
-           
+            String courseString = controller.getModel().getCourseMemberList().stream().filter(f -> f.getStudent().equals(headerStudent)).map(e -> e.getCourse().getName()).collect(Collectors.joining(", "));
+
             controller.getProfileHeaderCourseLabel().setText(courseString);
             controller.getStudentCourseBox().getItems().clear();
             List<Course> courses = controller.getModel().getCourseMemberList().stream().filter(f -> f.getStudent().equals(headerStudent)).map(e -> e.getCourse()).collect(Collectors.toList());
             controller.getStudentCourseBox().getItems().addAll(courses);
         });
-        
+
         controller.getStudentCourseBox().setOnAction((Event event) -> {
-            List<CourseDate> dates = controller.getModel().getCourseDateList().stream().filter(f -> f.getCourse().equals((Course)controller.getStudentCourseBox().getValue())).collect(Collectors.toList());
+            List<CourseDate> dates = controller.getModel().getCourseDateList().stream().filter(f -> f.getCourse().equals((Course) controller.getStudentCourseBox().getValue())).collect(Collectors.toList());
             dates.forEach(d -> controller.getModel().getAttendenceList().stream().filter(a -> a.getCourseDate().equals(d) && a.getCourseMember().getStudent().equals((Student) controller.getStudentProfilBox().getValue())));
-            
+
             ArrayList<CourseDateAttendenceWrapper> wrappedAttndences = new ArrayList<CourseDateAttendenceWrapper>();
             dates.forEach((date) -> {
                 CourseDateAttendenceWrapper wrapper = new CourseDateAttendenceWrapper();
                 wrapper.setCourseDate(date);
                 Optional<Attendence> attn = controller.getModel().getAttendenceList().stream().filter(a -> a.getCourseDate().equals(date) && a.getCourseMember().getStudent().equals((Student) controller.getStudentProfilBox().getValue())).collect(Collectors.toList()).stream().findFirst();
-                if(attn.isEmpty()){
+                if (attn.isEmpty()) {
                     wrapper.setAttendence(null);
-                }else{
+                } else {
                     wrapper.setAttendence(attn.get());
                 }
                 wrappedAttndences.add(wrapper);
@@ -64,8 +64,7 @@ public class ProfileHeaderPaneFactory {
             controller.getWrappedAttendencesTable().getItems().addAll(wrappedAttndences);
             controller.getWrappedAttendencesTable().refresh();
         });
-        
-        
+
         return pane;
     }
 
