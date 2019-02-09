@@ -1,5 +1,3 @@
-
-
 package edu.glyndwr.RegisterSystem.frontend.factories.facades;
 
 import edu.glyndwr.RegisterSystem.frontend.controller.RegisterSystemMainViewController;
@@ -18,6 +16,7 @@ import edu.glyndwr.RegisterSystem.frontend.factories.StudentTableViewFactory;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -31,6 +30,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FrontendFactoryFacade {
+
     @Autowired
     private AttendenceTableViewFactory attendenceTableViewFactory;
     @Autowired
@@ -39,7 +39,7 @@ public class FrontendFactoryFacade {
     private CourseDateTableViewFactory courseDateTableViewFactory;
     @Autowired
     private CourseDateNewDataPaneFactory courseDateNewDataPaneFactory;
-     @Autowired
+    @Autowired
     private CourseMemberTableViewFactory courseMemberTableViewFactory;
     @Autowired
     private CourseMemberNewDataPaneFactory courseMemberNewDataPaneFactory;
@@ -55,9 +55,9 @@ public class FrontendFactoryFacade {
     private ProfileDataTableViewFactory profileDataTableViewFactory;
     @Autowired
     private ProfileHeaderPaneFactory profileHeaderPaneFactory;
-    
-    public Stage buildFrontendUI(RegisterSystemMainViewController controller, Stage stage){
-        VBox root = new VBox();
+
+    public Stage buildFrontendUI(RegisterSystemMainViewController controller, Stage stage) {
+        VBox root = new VBox(3);
         root.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;" + "-fx-border-width: 2;" + "-fx-border-insets: 5;" + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 
         GridPane courseMemberNewDataPane;
@@ -66,14 +66,14 @@ public class FrontendFactoryFacade {
         GridPane courseDateNewDataPane;
         GridPane attendenceNewDataPane;
         GridPane profilAttendenceDataPane;
-        
+
         controller.setStudentTable(studentTableViewFactory.getPrepopulatedEditableTable(controller));
         studentNewDataPane = studentNewDataPaneFactory.buildNewPersonDataPane(controller);
-        
+
         controller.setCourseTable(courseTableViewFactory.getPrepopulatedEditableTable(controller));
         controller.getCourseTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         courseNewDataPane = courseNewDataPaneFactory.buildNewCourseDataPane(controller);
-        
+
         controller.setCourseMemberTable(courseMemberTableViewFactory.getNewTable());
         controller.getCourseMemberTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         courseMemberNewDataPane = courseMemberNewDataPaneFactory.buildNewCourseMemberDataPane(controller);
@@ -81,19 +81,22 @@ public class FrontendFactoryFacade {
         controller.setCourseDateTable(courseDateTableViewFactory.getNewTable());
         controller.getCourseDateTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         courseDateNewDataPane = courseDateNewDataPaneFactory.buildNewCourseDateDataPane(controller);
-        
+
         controller.setAttendenceTable(attendenceTableViewFactory.getNewTable());
         controller.getAttendenceTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         attendenceNewDataPane = attendenceNewDataPaneFactory.buildNewAttendenceDataPane(controller);
-        
+
         controller.setWrappedAttendencesTable(profileDataTableViewFactory.getNewTable());
         controller.getWrappedAttendencesTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         profilAttendenceDataPane = profileHeaderPaneFactory.buildNewPersonDataPane(controller);
-        
+
         TabPane tabPane = new TabPane();
+        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         Tab studentTab = new Tab();
         studentTab.setText("Register Student");
         FlowPane pane = new FlowPane();
+        pane.setVgap(5);
+        pane.setHgap(5);
         pane.getChildren().addAll(studentNewDataPane, controller.getStudentTable());
         studentTab.setContent(pane);
         tabPane.getTabs().add(studentTab);
@@ -101,6 +104,8 @@ public class FrontendFactoryFacade {
         Tab courseTab = new Tab();
         courseTab.setText("Register Course");
         FlowPane coursepane = new FlowPane();
+        coursepane.setVgap(5);
+        coursepane.setHgap(5);
         coursepane.getChildren().addAll(courseNewDataPane, controller.getCourseTable());
         courseTab.setContent(coursepane);
         tabPane.getTabs().add(courseTab);
@@ -108,6 +113,8 @@ public class FrontendFactoryFacade {
         Tab courseMemberTab = new Tab();
         courseMemberTab.setText("Register Course Members");
         FlowPane courseMemberPane = new FlowPane();
+        courseMemberPane.setVgap(5);
+        courseMemberPane.setHgap(5);
         courseMemberPane.getChildren().addAll(courseMemberNewDataPane, controller.getCourseMemberTable());
         courseMemberTab.setContent(courseMemberPane);
         tabPane.getTabs().add(courseMemberTab);
@@ -115,6 +122,8 @@ public class FrontendFactoryFacade {
         Tab courseDateTab = new Tab();
         courseDateTab.setText("Register Course Dates");
         FlowPane courseDatePane = new FlowPane();
+        courseDatePane.setVgap(5);
+        courseDatePane.setHgap(5);
         courseDatePane.getChildren().addAll(courseDateNewDataPane, controller.getCourseDateTable());
         courseDateTab.setContent(courseDatePane);
         tabPane.getTabs().add(courseDateTab);
@@ -122,18 +131,21 @@ public class FrontendFactoryFacade {
         Tab attendenceTab = new Tab();
         attendenceTab.setText("Book Attendence");
         FlowPane attendencePane = new FlowPane();
+        attendencePane.setVgap(5);
+        attendencePane.setHgap(5);
         attendencePane.getChildren().addAll(attendenceNewDataPane, controller.getAttendenceTable());
         attendenceTab.setContent(attendencePane);
         tabPane.getTabs().add(attendenceTab);
-        
+
         Tab profileTab = new Tab();
         profileTab.setText("Profile");
         FlowPane profilePane = new FlowPane();
+        profilePane.setVgap(5);
+        profilePane.setHgap(5);
         profilePane.getChildren().addAll(profilAttendenceDataPane, controller.getWrappedAttendencesTable());
         profileTab.setContent(profilePane);
         tabPane.getTabs().add(profileTab);
-        
-        
+
         root.getChildren().addAll(tabPane);
         root.setSpacing(5);
         Scene scene = new Scene(root);
