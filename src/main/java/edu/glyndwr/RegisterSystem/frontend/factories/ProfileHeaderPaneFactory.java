@@ -61,7 +61,6 @@ public class ProfileHeaderPaneFactory {
                 controller.getModel().getAttendenceList().stream()
                         .filter(a -> a.getCourseDate().equals(date) && a.getCourseMember().getStudent().equals((Student) controller.getStudentProfilBox().getValue()))
                         .findFirst().ifPresent(w -> wrapper.setAttendence(w));
-            List<CourseDate> dates = controller.getModel().getCourseDateList().stream().filter(f -> f.getCourse().equals((Course) controller.getStudentCourseBox().getValue())).collect(Collectors.toList());
             dates.forEach(d -> controller.getModel().getAttendenceList().stream().filter(a -> a.getCourseDate().equals(d) && a.getCourseMember().getStudent().equals((Student) controller.getStudentProfilBox().getValue())));
 
                 wrappedAttndences.add(wrapper);
