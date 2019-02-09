@@ -41,22 +41,35 @@ The tabs must be filled from left to right, since the more left tabs create info
 Students base data is entered here by filling the textfields and clicking the "Add" button.
 For demo purposes is this tab prefilled with 6 students
 To delete a student record, mark the line and click "Delete Selected Rows"
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/studentregistration.PNG)
 
 #### Register Course
 the same logic like in Register Student applies here.
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/registercourse.PNG)
 
 #### Register Course Members
 Existing students can be added as course members to existing courses.
 same Logic as above.
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/registercoursemember.PNG)
 
 #### Register Course Dates
 Courses must have course dates to track the attendence of cours members at course dates.
 select a course and a date and add a date to the course date list.
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/registercoursedate.PNG)
 
 #### Book Attendence
 An attending course member can be added to a course date here.
-Select course date and course Member and her/him to the attending members
+Select course date and course Member and her/him to the attending members.
+
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/bookAttendence.PNG)
 
 #### Profile
 the Profile built from the entered Data.
 See the attendence for each student for each course she/he is member
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/profileview.PNG)
+
+### Class Diagrams
+#### Core Classes
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/mainClasses.png)
+#### Complete 
+![alt text](https://github.com/s17001620/RegisterSystem/blob/master/documentation/completeClassdiagram.png)
