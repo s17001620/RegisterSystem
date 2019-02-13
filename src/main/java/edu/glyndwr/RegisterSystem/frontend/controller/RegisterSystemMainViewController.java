@@ -9,6 +9,7 @@ import edu.glyndwr.RegisterSystem.backend.data.services.RegistryService;
 import edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade;
 import edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel;
 import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,9 +20,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +32,7 @@ import org.springframework.stereotype.Component;
  *
  * @author Alexander Bruckbauer s17001620
  */
+@Log
 @Component
 @Getter
 @Setter
@@ -70,7 +74,19 @@ public class RegisterSystemMainViewController {
 
     public void initializeStage(Stage stage) {
         inititalizeFields();
-        frontendFactoryFacade.buildFrontendUI(this, stage).show();
+        stage = frontendFactoryFacade.buildFrontendUI(this, stage);
+                InputStream icon = getClass().getResourceAsStream("icon.png");
+        if (null != icon) {
+            Image imageIcon = new Image(icon);
+            if (imageIcon != null) {
+                stage.getIcons().add(imageIcon);
+            }else{
+                log.info("imageIcon is null! no Icon!");
+            }
+        } else {
+            log.info("Icon inputStream is null! no Icon!");
+        }
+        stage.show();
     }
 
     public void deleteStudent() {
