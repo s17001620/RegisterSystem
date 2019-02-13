@@ -9,9 +9,14 @@ import edu.glyndwr.RegisterSystem.backend.data.services.RegistryService;
 import edu.glyndwr.RegisterSystem.frontend.factories.facades.FrontendFactoryFacade;
 import edu.glyndwr.RegisterSystem.frontend.model.ForntendUIModel;
 import edu.glyndwr.RegisterSystem.frontend.model.wrapper.CourseDateAttendenceWrapper;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -26,6 +31,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -75,16 +81,19 @@ public class RegisterSystemMainViewController {
     public void initializeStage(Stage stage) {
         inititalizeFields();
         stage = frontendFactoryFacade.buildFrontendUI(this, stage);
-                InputStream icon = getClass().getResourceAsStream("icon.png");
-        if (null != icon) {
-            Image imageIcon = new Image(icon);
-            if (imageIcon != null) {
-                stage.getIcons().add(imageIcon);
+        InputStream icon = null;
+        try {
+            icon = new DataInputStream(new FileInputStream(new ClassPathResource("icon.png").getFile()));
+            
+            if(null!=icon){
+                Image imageIcon = new Image(icon);
+                stage.getIcons().add(imageIcon); 
             }else{
-                log.info("imageIcon is null! no Icon!");
+                log.info("icon inputstream null");
             }
-        } else {
-            log.info("Icon inputStream is null! no Icon!");
+           
+        } catch (IOException ex) {
+            Logger.getLogger(RegisterSystemMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         stage.show();
     }
