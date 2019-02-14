@@ -9,12 +9,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Alexander Bruckbauer s17001620
  */
+@Log
 @Component
 public class CourseMemberNewDataPaneFactory {
 
@@ -22,8 +24,12 @@ public class CourseMemberNewDataPaneFactory {
         GridPane pane = new GridPane();
         pane.setHgap(10);
         pane.setVgap(5);
-        controller.getCourseMemberCourseBox().getItems().addAll(controller.getCourseTable().getItems());
-        controller.getCourseMemberMemberBox().getItems().addAll(controller.getStudentTable().getItems());
+        if(controller.getModel().getCourseList().isEmpty()){
+          controller.getModel().getCourseList().addAll(controller.getCourseTable().getItems());
+        log.info("Warning: the Course List was empty!");
+        }
+        controller.getCourseMemberCourseBox().setItems(controller.getModel().getCourseList());
+        controller.getCourseMemberMemberBox().setItems(controller.getModel().getStudentList());
         pane.addRow(0, new Label("Course: "), controller.getCourseMemberCourseBox());
         pane.addRow(1, new Label("Member: "), controller.getCourseMemberMemberBox());
 

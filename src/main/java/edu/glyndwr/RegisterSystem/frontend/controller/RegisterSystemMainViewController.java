@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
@@ -50,6 +51,7 @@ public class RegisterSystemMainViewController {
     private FrontendFactoryFacade frontendFactoryFacade;
     @Autowired
     private ForntendUIModel model;
+    private TabPane tabPane;
     private TableView<CourseDate> courseDateTable;
     private TableView<CourseMember> courseMemberTable;
     private TableView<Attendence> attendenceTable;
@@ -77,17 +79,19 @@ public class RegisterSystemMainViewController {
     private ComboBox studentCourseBox;
     Label profileHeaderAddressLabel;
     private Label profileHeaderCourseLabel;
+    private Stage stage;
 
     public void initializeStage(Stage stage) {
+        this.stage = stage;
         inititalizeFields();
-        stage = frontendFactoryFacade.buildFrontendUI(this, stage);
+        this.stage = frontendFactoryFacade.buildFrontendUI(this, this.stage);
         InputStream icon = null;
         try {
             icon = new DataInputStream(new FileInputStream(new ClassPathResource("icon.png").getFile()));
             
             if(null!=icon){
                 Image imageIcon = new Image(icon);
-                stage.getIcons().add(imageIcon); 
+                this.stage.getIcons().add(imageIcon); 
             }else{
                 log.info("icon inputstream null");
             }
@@ -95,7 +99,7 @@ public class RegisterSystemMainViewController {
         } catch (IOException ex) {
             Logger.getLogger(RegisterSystemMainViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        stage.show();
+        this.stage.show();
     }
 
     public void deleteStudent() {
@@ -136,6 +140,7 @@ public class RegisterSystemMainViewController {
         Student.setStudentID(studentIDField.getText());
         studentTable.getItems().add(Student);
         model.getStudentList().add(Student);
+        frontendFactoryFacade.rebuildCourseMemberAfterStudentAdded(this);
         firstNameField.setText(null);
         lastNameField.setText(null);
         streetField.setText(null);
@@ -315,6 +320,7 @@ public class RegisterSystemMainViewController {
     }
 
     public void inititalizeFields() {
+        tabPane = new TabPane();
         firstNameField = new TextField();
         lastNameField = new TextField();
         streetField = new TextField();

@@ -90,8 +90,7 @@ public class FrontendFactoryFacade {
         controller.getWrappedAttendencesTable().prefWidthProperty().bind(stage.widthProperty().subtract(50.0));
         profilAttendenceDataPane = profileHeaderPaneFactory.buildNewPersonDataPane(controller);
 
-        TabPane tabPane = new TabPane();
-        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        controller.getTabPane().setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         Tab studentTab = new Tab();
         studentTab.setText("Register Student");
         FlowPane pane = new FlowPane();
@@ -99,7 +98,7 @@ public class FrontendFactoryFacade {
         pane.setHgap(5);
         pane.getChildren().addAll(studentNewDataPane, controller.getStudentTable());
         studentTab.setContent(pane);
-        tabPane.getTabs().add(studentTab);
+        controller.getTabPane().getTabs().add(studentTab);
 
         Tab courseTab = new Tab();
         courseTab.setText("Register Course");
@@ -108,16 +107,18 @@ public class FrontendFactoryFacade {
         coursepane.setHgap(5);
         coursepane.getChildren().addAll(courseNewDataPane, controller.getCourseTable());
         courseTab.setContent(coursepane);
-        tabPane.getTabs().add(courseTab);
+        controller.getTabPane().getTabs().add(courseTab);
 
         Tab courseMemberTab = new Tab();
+        courseMemberTab.setId("courseMemberTab");
         courseMemberTab.setText("Register Course Members");
         FlowPane courseMemberPane = new FlowPane();
+        courseMemberPane.setId("courseMemberPane");
         courseMemberPane.setVgap(5);
         courseMemberPane.setHgap(5);
         courseMemberPane.getChildren().addAll(courseMemberNewDataPane, controller.getCourseMemberTable());
         courseMemberTab.setContent(courseMemberPane);
-        tabPane.getTabs().add(courseMemberTab);
+        controller.getTabPane().getTabs().add(courseMemberTab);
 
         Tab courseDateTab = new Tab();
         courseDateTab.setText("Register Course Dates");
@@ -126,7 +127,7 @@ public class FrontendFactoryFacade {
         courseDatePane.setHgap(5);
         courseDatePane.getChildren().addAll(courseDateNewDataPane, controller.getCourseDateTable());
         courseDateTab.setContent(courseDatePane);
-        tabPane.getTabs().add(courseDateTab);
+        controller.getTabPane().getTabs().add(courseDateTab);
 
         Tab attendenceTab = new Tab();
         attendenceTab.setText("Book Attendence");
@@ -135,7 +136,7 @@ public class FrontendFactoryFacade {
         attendencePane.setHgap(5);
         attendencePane.getChildren().addAll(attendenceNewDataPane, controller.getAttendenceTable());
         attendenceTab.setContent(attendencePane);
-        tabPane.getTabs().add(attendenceTab);
+        controller.getTabPane().getTabs().add(attendenceTab);
 
         Tab profileTab = new Tab();
         profileTab.setText("Profile");
@@ -144,13 +145,25 @@ public class FrontendFactoryFacade {
         profilePane.setHgap(5);
         profilePane.getChildren().addAll(profilAttendenceDataPane, controller.getWrappedAttendencesTable());
         profileTab.setContent(profilePane);
-        tabPane.getTabs().add(profileTab);
+        controller.getTabPane().getTabs().add(profileTab);
 
-        root.getChildren().addAll(tabPane);
+        root.getChildren().addAll(controller.getTabPane());
         root.setSpacing(5);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Student Registration");
         return stage;
+    }
+    
+    public void rebuildCourseMemberAfterStudentAdded(RegisterSystemMainViewController controller){
+        GridPane courseMemberNewDataPane;
+        courseMemberNewDataPane = courseMemberNewDataPaneFactory.buildNewCourseMemberDataPane(controller);
+        FlowPane courseMemberPane;
+        courseMemberPane=(FlowPane) controller.getStage().getScene().lookup("#courseMemberPane");
+        courseMemberPane.getChildren().clear();
+        courseMemberPane.setId("courseMemberPane");
+        courseMemberPane.setVgap(5);
+        courseMemberPane.setHgap(5);
+        courseMemberPane.getChildren().addAll(courseMemberNewDataPane, controller.getCourseMemberTable());
     }
 }

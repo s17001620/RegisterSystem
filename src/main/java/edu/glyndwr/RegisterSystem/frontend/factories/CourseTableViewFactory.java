@@ -33,7 +33,7 @@ public class CourseTableViewFactory {
         this.prepopulateListWithDummyData();
         this.controller = controller;
         this.controller.getModel().getCourseList().addAll(getCourseList());
-        table.getItems().addAll(getCourseList());
+        table.getItems().addAll(this.controller.getModel().getCourseList());
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         table.setPlaceholder(new Label("No visible columns and/or data exist."));
         table.setEditable(true);
@@ -148,5 +148,6 @@ public class CourseTableViewFactory {
         courseList.add(p4);
         courseList.add(p5);
         courseList.add(p6);
+
     }
 }
